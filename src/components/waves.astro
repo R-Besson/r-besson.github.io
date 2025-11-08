@@ -1,0 +1,218 @@
+<canvas id="animated-canvas" class="fixed inset-0 -z-10"></canvas>
+
+<script is:inline>
+	class EtherealRibbon {
+		constructor(canvasId) {
+			this.canvas = document.getElementById(canvasId);
+			if (!this.canvas) {
+				console.error("Canvas element not found!");
+				return;
+			}
+			this.ctx = this.canvas.getContext("2d");
+			this.width = 0;
+			this.height = 0;
+			this.time = 0;
+			this.lastTimestamp = 0;
+
+			this.config = {
+				startColor: "#3a9cff",
+				endColor: "#d4dae9",
+				ribbonCount: 12,
+				staggerMulti: 8,
+				flowSpeed: 0.0004,
+				pathResolution: 5,
+				baseAmplitude: 70,
+				breathing: {
+					enabled: true,
+					speed: 0.0005,
+					intensity: 0.2,
+				},
+				waveComposition: [
+					{
+						type: "sin",
+						frequency: 0.002,
+						amplitude_multiplier: 1.0,
+					},
+					{
+						type: "sin",
+						frequency: 0.007,
+						amplitude_multiplier: 0.6,
+					},
+					{
+						type: "cos",
+						frequency: 0.011,
+						amplitude_multiplier: 0.3,
+					},
+					{
+						type: "sin",
+						frequency: 0.025,
+						amplitude_multiplier: 0.15,
+					},
+					{
+						type: "sin",
+						frequency: 0.04,
+						amplitude_multiplier: 0.08,
+					},
+					{
+						type: "cos",
+						frequency: 0.0045,
+						amplitude_multiplier: 0.2,
+					},
+				],
+			};
+
+			this.startColorRGB = this.parseColor(this.config.startColor);
+			this.endColorRGB = this.parseColor(this.config.endColor);
+			if (!this.startColorRGB || !this.endColorRGB) {
+				console.error("Invalid start or end color format.");
+				return;
+			}
+
+			this.canvas.style.pointerEvents = "none";
+
+			this.boundHandleResize = this.handleResize.bind(this);
+			if (window.visualViewport) {
+				window.visualViewport.addEventListener(
+					"resize",
+					this.boundHandleResize,
+				);
+				window.visualViewport.addEventListener(
+					"scroll",
+					this.boundHandleResize,
+				);
+			} else {
+				window.addEventListener("resize", this.boundHandleResize);
+			}
+
+			this.handleResize();
+			this.animate(0);
+		}
+
+		parseColor(hex) {
+			const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(
+				hex,
+			);
+			return result
+				? {
+						r: parseInt(result[1], 16),
+						g: parseInt(result[2], 16),
+						b: parseInt(result[3], 16),
+					}
+				: null;
+		}
+
+		handleResize() {
+			const dpr = window.devicePixelRatio || 1;
+			if (window.visualViewport) {
+				const vv = window.visualViewport;
+				this.width = vv.width;
+				this.height = vv.height;
+				this.canvas.style.width = `${this.width}px`;
+				this.canvas.style.height = `${this.height}px`;
+				this.canvas.style.transform = `translate(${vv.offsetLeft}px, ${vv.offsetTop}px)`;
+			} else {
+				this.width = window.innerWidth;
+				this.height = window.innerHeight;
+				this.canvas.style.width = `${this.width}px`;
+				this.canvas.style.height = `${this.height}px`;
+				this.canvas.style.transform = "translate(0, 0)";
+			}
+			this.canvas.width = this.width * dpr;
+			this.canvas.height = this.height * dpr;
+			this.ctx.scale(dpr, dpr);
+			this.config.baseAmplitude =
+				Math.min(this.width, this.height) * 0.12;
+		}
+
+		getWaveValue(input) {
+			let waveSum = 0;
+
+			for (const wave of this.config.waveComposition) {
+				const angle =
+					input * wave.frequency + this.time * this.config.flowSpeed;
+				let value;
+
+				switch (wave.type) {
+					case "cos":
+						value = Math.cos(angle);
+						break;
+					case "sin":
+					default:
+						value = Math.sin(angle);
+						break;
+				}
+				waveSum += value * wave.amplitude_multiplier;
+			}
+
+			let breathMultiplier = 1.0;
+			if (this.config.breathing.enabled) {
+				const breath = Math.sin(
+					this.time * this.config.breathing.speed,
+				);
+				breathMultiplier = 1 + breath * this.config.breathing.intensity;
+			}
+
+			return waveSum * this.config.baseAmplitude * breathMultiplier;
+		}
+		draw() {
+			this.ctx.clearRect(0, 0, this.width, this.height);
+			const res = this.config.pathResolution;
+			const verticalCenter = this.height / 2;
+
+			for (let i = 0; i < this.config.ribbonCount; i++) {
+				const staggerOffset =
+					(i / this.config.ribbonCount) *
+					Math.PI *
+					2 *
+					this.config.staggerMulti;
+				const t =
+					this.config.ribbonCount > 1
+						? i / (this.config.ribbonCount - 1)
+						: 0;
+				const r = Math.round(
+					this.startColorRGB.r +
+						(this.endColorRGB.r - this.startColorRGB.r) * t,
+				);
+				const g = Math.round(
+					this.startColorRGB.g +
+						(this.endColorRGB.g - this.startColorRGB.g) * t,
+				);
+				const b = Math.round(
+					this.startColorRGB.b +
+						(this.endColorRGB.b - this.startColorRGB.b) * t,
+				);
+
+				this.ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.2)`;
+				this.ctx.lineWidth = 1.5 + i * 0.25;
+				this.ctx.beginPath();
+
+				let firstY = verticalCenter + this.getWaveValue(staggerOffset);
+				this.ctx.moveTo(0, firstY);
+
+				for (let x = res; x <= this.width + res; x += res) {
+					let y =
+						verticalCenter + this.getWaveValue(x + staggerOffset);
+					this.ctx.lineTo(x, y);
+				}
+				this.ctx.stroke();
+			}
+		}
+
+		update(timestamp) {
+			const deltaTime = Math.min(100, timestamp - this.lastTimestamp);
+			this.time += deltaTime;
+			this.lastTimestamp = timestamp;
+		}
+
+		animate(timestamp) {
+			if (!this.ctx) return;
+			this.update(timestamp);
+			this.draw();
+			requestAnimationFrame(this.animate.bind(this));
+		}
+	}
+
+	if (!window.etherealRibbonInstance) {
+		window.etherealRibbonInstance = new EtherealRibbon("animated-canvas");
+	}
+</script>

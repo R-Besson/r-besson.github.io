@@ -1,0 +1,100 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/main.astro";
+import Waves from "../components/waves.astro";
+---
+
+<Layout>
+	<Waves />
+	<div
+		class="flex h-full min-h-screen w-full items-center justify-center p-4"
+	>
+		<main class="flex w-full max-w-sm flex-col gap-2">
+			<!-- Header Section -->
+			<header class="border p-3 text-center">
+				<h1 class="text-lg tracking-widest">WELCOME</h1>
+			</header>
+
+			<!-- Main Navigation Links -->
+			<nav class="border p-8">
+				<ul class="flex flex-col items-center gap-6 text-2xl">
+					<li>
+						<a href="/about">about</a>
+					</li>
+					<li>
+						<a href="/projects">projects</a>
+					</li>
+				</ul>
+			</nav>
+
+			<footer class="flex w-full flex-col gap-2">
+				<div class="flex w-full items-center justify-between gap-2">
+					<a
+						href="https://github.com/r-besson"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="border p-3 text-center flex-grow"
+					>
+						github
+					</a>
+					<a
+						href="https://www.linkedin.com/in/romain-besson-/"
+						target="_blank"
+						class="border p-3 text-center flex-grow"
+					>
+						linkedin
+					</a>
+					<a
+						href="https://www.collletttivo.it/typefaces/necto-mono"
+						target="_blank"
+						class="border p-3 text-center"
+					>
+						typeface
+					</a>
+					<button
+						id="theme-toggle"
+						title="Toggle theme"
+						class="border w-12 h-12 flex items-center justify-center text-2xl"
+					>
+						☾
+					</button>
+				</div>
+			</footer>
+		</main>
+	</div>
+</Layout>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const themeToggleButton = document.getElementById("theme-toggle");
+		const htmlElement = document.documentElement;
+
+		if (!themeToggleButton) return;
+		function applyTheme(theme: string) {
+			if (!themeToggleButton) return;
+			if (theme === "light") {
+				htmlElement.setAttribute("data-theme", "light");
+				themeToggleButton.textContent = "✰";
+				localStorage.setItem("theme", "light");
+			} else {
+				htmlElement.removeAttribute("data-theme");
+				themeToggleButton.textContent = "☾";
+				localStorage.setItem("theme", "dark");
+			}
+		}
+
+		const currentTheme = localStorage.getItem("theme") || "dark";
+		if (currentTheme === "light") {
+			themeToggleButton.textContent = "✰";
+		} else {
+			themeToggleButton.textContent = "☾";
+		}
+
+		themeToggleButton.addEventListener("click", () => {
+			const newTheme = htmlElement.hasAttribute("data-theme")
+				? "dark"
+				: "light";
+			applyTheme(newTheme);
+		});
+	});
+</script>

@@ -1,0 +1,12 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/main.astro";
+import NeuralSynapse from "../components/neural-synapse.astro";
+import Sidebar from "../components/Sidebar.jsx";
+---
+
+<Layout>
+	<a href="/" class="block w-full p-3"> ← back to home </a>
+	<NeuralSynapse />
+	<Sidebar client:load />
+</Layout>

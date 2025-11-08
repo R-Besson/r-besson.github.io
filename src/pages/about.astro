@@ -1,0 +1,35 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/main.astro";
+import Hologram from "../components/hologram.astro";
+---
+
+<Layout title="About Me">
+	<Hologram />
+
+	<div class="relative h-full min-h-screen w-full">
+		<main
+			class="relative w-full max-w-xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
+		>
+			<div
+				class="relative z-10 flex flex-col gap-2 p-8 text-left before:absolute before:inset-0 before:-z-10"
+			>
+				<p class="text-lg leading-relaxed">
+					<a href="/" class="block w-full pb-3">
+						← back to home
+					</a>
+					I am an honors computer science student attending<br /><a
+						href="https://www.mcgill.ca/"
+						target="_blank"
+					>
+						McGill University</a
+					> with an interest for algorithm design and optimization problems; a proven
+					ability to develop complex solutions in C++, Rust, and other languages,
+					demonstrated through independent research <a href="/projects">projects</a> in
+					computational geometry, optimization, and web development.<br>
+					Contact me: <a href="mailto:romainbesson8@gmail.com">romainbesson8@gmail.com</a>
+				</p>
+			</div>
+		</main>
+	</div>
+</Layout>
