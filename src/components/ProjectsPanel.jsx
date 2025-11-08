@@ -17,7 +17,26 @@ const projects = [
 		image: "https://github.com/R-Besson/strip-packing-cpp-rewritten/blob/main/src/example.png?raw=true",
 		tags: ["C++", "Python", "Makefile"],
 		status: "ONGOING"
-	}
+	},
+	{
+		title: "Playlist Transfer",
+		description: "Web app allowing for the transfer of playlists manually using authentication tokens between music services which allows for limitless transfer.",
+		link: "https://github.com/R-Besson/playlist-transfer",
+		tags: ["JavaScript", "HTML", "CSS", "APIs"]
+	},
+	{
+		title: "Pathfinding Visualizer",
+		description: "Pathfinding Algorithms Visualizer interface built in native JS/HTML/CSS.",
+		link: "https://github.com/R-Besson/pathfinding.js",
+		tags: ["JavaScript", "HTML", "CSS", "Animejs"]
+	},
+	{
+		title: "This Website",
+		description: "My github.io portfolio and website.",
+		link: "https://github.com/R-Besson/r-besson.github.io",
+		tags: ["Astro", "React", "JavaScript", "HTML", "CSS", "Tailwind"],
+		status: "ONGOING"
+	},
 ];
 
 const ProjectsPanel = ({ isOpen, onClose }) => {
