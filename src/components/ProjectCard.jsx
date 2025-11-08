@@ -10,7 +10,7 @@ const ProjectCard = ({ project }) => {
 	return (
 		<Tag
 			{...tagProps}
-			className="group block p-4 mb-4 rounded-sm bg-[var(--color-primary)]/5 backdrop-blur-sm transition-all duration-300 hover:bg-[var(--color-primary)]/10 hover:shadow-lg"
+			className="group block p-4 mb-4 rounded-sm bg-[var(--color-bg-element)] backdrop-blur-sm transition-all duration-300 hover:bg-[var(--color-primary)]/10 hover:shadow-lg"
 		>
 			{project.image && (
 				<img
