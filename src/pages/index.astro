@@ -11,12 +11,12 @@ import Waves from "../components/waves.astro";
 	>
 		<main class="flex w-full max-w-sm flex-col gap-2">
 			<!-- Header Section -->
-			<header class="border p-3 text-center">
-				<h1 class="text-lg tracking-widest">WELCOME</h1>
+			<header class="p-4 text-center rounded-t-lg bg-[var(--color-primary)]/5">
+				<h1 class="text-lg tracking-widest text-[var(--color-accent)]">WELCOME</h1>
 			</header>
 
 			<!-- Main Navigation Links -->
-			<nav class="border p-8">
+			<nav class="bg-[var(--color-primary)]/5 p-8">
 				<ul class="flex flex-col items-center gap-6 text-2xl">
 					<li>
 						<a href="/about">about</a>
@@ -33,7 +33,7 @@ import Waves from "../components/waves.astro";
 						href="https://github.com/r-besson"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="border p-3 text-center flex-grow"
+						class="bg-[var(--color-primary)]/5 p-3 text-center flex-1"
 					>
 						github
 					</a>
@@ -41,7 +41,7 @@ import Waves from "../components/waves.astro";
 						href="https://www.linkedin.com/in/romain-besson-/"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="border p-3 text-center flex-grow"
+						class="bg-[var(--color-primary)]/5 p-3 text-center flex-1"
 					>
 						linkedin
 					</a>
@@ -49,14 +49,15 @@ import Waves from "../components/waves.astro";
 						href="https://www.collletttivo.it/typefaces/necto-mono"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="border p-3 text-center"
+						class="bg-[var(--color-primary)]/5 p-3 text-center flex-1"
 					>
 						typeface
 					</a>
 					<button
 						id="theme-toggle"
 						title="Toggle theme"
-						class="border w-12 h-12 flex items-center justify-center text-2xl"
+						class="bg-[var(--color-primary)]/5 w-12 h-12 flex items-center justify-center text-2xl cursor-pointer"
+						aria-label="Toggle light and dark theme"
 					>
 						<span class="light-icon">✰</span>
     					<span class="dark-icon">☾</span>

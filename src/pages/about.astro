@@ -11,23 +11,33 @@ import Hologram from "../components/hologram.astro";
 		<main
 			class="relative w-full max-w-xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
 		>
-			<div
-				class="relative z-10 flex flex-col gap-2 p-8 text-left before:absolute before:inset-0 before:-z-10"
-			>
+			<div class="relative z-10 flex flex-col gap-4 p-8 text-left ...">
+				<nav>
+					<a
+						href="/"
+						class="inline-block pb-3 hover:text-[var(--color-accent)]"
+					>
+						← back to home
+					</a>
+				</nav>
+				<p class="text-lg leading-relaxed text-justify font-mono">
+					<strong>Hi, I'm Romain...</strong>
+				</p>
 				<p class="text-lg leading-relaxed text-justify">
-					<a href="/" class="block w-full pb-3"> ← back to home </a>
-					<b>Hi, I'm Romain...</b><br>
 					I'm an honors computer science student attending
 					<a
 						href="https://www.mcgill.ca/"
 						rel="noopener noreferrer"
 						target="_blank">McGill University</a
-					> with an interest for algorithm design and optimization problems;
+					>
+					with an interest for algorithm design and optimization problems;
 					a proven ability to develop complex solutions in C++, Rust, and
-					other languages, demonstrated through independent <a
-						href="/projects">projects</a
-					> in computational geometry, optimization. I am also interested in web development.<br
-					/>
+					other languages, demonstrated through independent
+					<a href="/projects">projects</a>
+					in computational geometry, optimization. I am also interested
+					in web development.
+				</p>
+				<p class="text-lg leading-relaxed text-justify">
 					Contact me: <a href="mailto:romainbesson8@gmail.com"
 						>romainbesson8@gmail.com</a
 					>

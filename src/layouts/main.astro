@@ -11,10 +11,7 @@ import "../styles/global.css";
 
 		<script is:inline>
 			const theme = (() => {
-				if (
-					typeof localStorage !== "undefined" &&
-					localStorage.getItem("theme")
-				) {
+				if (localStorage.getItem("theme")) {
 					return localStorage.getItem("theme");
 				}
 				if (

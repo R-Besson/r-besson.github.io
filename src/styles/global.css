@@ -19,14 +19,15 @@
 
 
 /* global */
-html[data-theme="light"], :root {
+html[data-theme="light"],
+:root {
 	--color-bg: #eef2f7;
 	--color-primary: #212529;
 	--color-secondary: #495357;
 	--color-accent: #1c81c9;
 	--color-accent2: #0275a3;
 
-	--font-main: "NectoMono", monospace;
+	--font-mono: "NectoMono", monospace;
 	--font-sans: "Absans", sans-serif;
 	--text-shadow-m: 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg);
 }
@@ -38,7 +39,7 @@ html[data-theme="dark"] {
 	--color-accent: #3abaff;
 	--color-accent2: #0494c8;
 
-	--font-main: "NectoMono", monospace;
+	--font-mono: "NectoMono", monospace;
 	--font-sans: "Absans", sans-serif;
 	--text-shadow-m: 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg);
 }
@@ -48,14 +49,17 @@ html[data-theme="dark"] {
 	::-webkit-scrollbar {
 		width: 10px;
 	}
+
 	::-webkit-scrollbar-track {
-		background: var(--color-primary); 
+		background: var(--color-primary);
 	}
+
 	::-webkit-scrollbar-thumb {
-		background: var(--color-secondary); 
+		background: var(--color-secondary);
 	}
+
 	::-webkit-scrollbar-thumb:hover {
-		background: var(--color-accent); 
+		background: var(--color-accent);
 	}
 
 	html,
@@ -69,7 +73,7 @@ html[data-theme="dark"] {
 	body {
 		background-color: var(--color-bg);
 		color: var(--color-primary);
-		font-family: var(--font-main);
+		font-family: var(--font-mono);
 		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 	}
 
@@ -80,12 +84,12 @@ html[data-theme="dark"] {
 	h4,
 	h5,
 	h6 {
-		font-family: var(--font-main);
+		font-family: var(--font-mono);
 		letter-spacing: 0.05em;
 	}
 
 	p {
-		font-family: var(--font-main);
+		font-family: var(--font-sans);
 		text-shadow: var(--text-shadow-m);
 	}
 
@@ -107,7 +111,7 @@ html[data-theme="dark"] {
 	code,
 	pre,
 	kbd {
-		font-family: var(--font-main);
+		font-family: var(--font-mono);
 	}
 
 	::selection {
@@ -129,6 +133,7 @@ html[data-theme="dark"] {
 	html[data-theme="light"] .dark-icon {
 		display: none;
 	}
+
 	html[data-theme="light"] .light-icon {
 		display: inline-block;
 	}
@@ -136,6 +141,7 @@ html[data-theme="dark"] {
 	html[data-theme="dark"] .dark-icon {
 		display: inline-block;
 	}
+
 	html[data-theme="dark"] .light-icon {
 		display: none;
 	}

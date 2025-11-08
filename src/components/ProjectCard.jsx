@@ -42,7 +42,7 @@ const ProjectCard = ({ project }) => {
 				</div>
 			)}
 
-			<p className="font-main text-[var(--color-secondary)] text-base">
+			<p className="font-sans text-[var(--color-secondary)] text-base">
 				{project.description}
 			</p>
 		</Tag>
