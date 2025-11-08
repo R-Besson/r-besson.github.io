@@ -40,6 +40,7 @@ import Waves from "../components/waves.astro";
 					<a
 						href="https://www.linkedin.com/in/romain-besson-/"
 						target="_blank"
+						rel="noopener noreferrer"
 						class="border p-3 text-center flex-grow"
 					>
 						linkedin
@@ -47,6 +48,7 @@ import Waves from "../components/waves.astro";
 					<a
 						href="https://www.collletttivo.it/typefaces/necto-mono"
 						target="_blank"
+						rel="noopener noreferrer"
 						class="border p-3 text-center"
 					>
 						typeface
@@ -56,7 +58,8 @@ import Waves from "../components/waves.astro";
 						title="Toggle theme"
 						class="border w-12 h-12 flex items-center justify-center text-2xl"
 					>
-						☾
+						<span class="light-icon">✰</span>
+    					<span class="dark-icon">☾</span>
 					</button>
 				</div>
 			</footer>
@@ -65,36 +68,14 @@ import Waves from "../components/waves.astro";
 </Layout>
 
 <script>
-	document.addEventListener("DOMContentLoaded", () => {
-		const themeToggleButton = document.getElementById("theme-toggle");
-		const htmlElement = document.documentElement;
+	const themeToggleButton = document.getElementById("theme-toggle");
+	const htmlElement = document.documentElement;
 
-		if (!themeToggleButton) return;
-		function applyTheme(theme: string) {
-			if (!themeToggleButton) return;
-			if (theme === "light") {
-				htmlElement.setAttribute("data-theme", "light");
-				themeToggleButton.textContent = "✰";
-				localStorage.setItem("theme", "light");
-			} else {
-				htmlElement.removeAttribute("data-theme");
-				themeToggleButton.textContent = "☾";
-				localStorage.setItem("theme", "dark");
-			}
-		}
+	themeToggleButton?.addEventListener("click", () => {
+		const currentTheme = htmlElement.getAttribute("data-theme");
+		const newTheme = currentTheme === "light" ? "dark" : "light";
 
-		const currentTheme = localStorage.getItem("theme") || "dark";
-		if (currentTheme === "light") {
-			themeToggleButton.textContent = "✰";
-		} else {
-			themeToggleButton.textContent = "☾";
-		}
-
-		themeToggleButton.addEventListener("click", () => {
-			const newTheme = htmlElement.hasAttribute("data-theme")
-				? "dark"
-				: "light";
-			applyTheme(newTheme);
-		});
+		htmlElement.setAttribute("data-theme", newTheme);
+		localStorage.setItem("theme", newTheme);
 	});
 </script>

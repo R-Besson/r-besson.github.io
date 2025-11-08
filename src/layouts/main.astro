@@ -18,18 +18,14 @@ import "../styles/global.css";
 					return localStorage.getItem("theme");
 				}
 				if (
-					window.matchMedia("(prefers-color-scheme: light)").matches
+					window.matchMedia("(prefers-color-scheme: dark)").matches
 				) {
-					return "light";
+					return "dark";
 				}
-				return "dark";
+				return "light";
 			})();
 
-			if (theme === "light") {
-				document.documentElement.setAttribute("data-theme", "light");
-			} else {
-				document.documentElement.removeAttribute("data-theme");
-			}
+			document.documentElement.setAttribute("data-theme", theme);
 		</script>
 	</head>
 	<body>
