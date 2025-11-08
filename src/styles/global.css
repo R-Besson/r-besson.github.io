@@ -22,32 +22,38 @@
 html[data-theme="light"],
 :root {
 	--color-bg: #eef2f7;
-	--color-primary: #212529;
+	--color-primary: #212629;
 	--color-secondary: #495357;
 	--color-accent: #1c81c9;
 	--color-accent2: #0275a3;
 
 	--font-mono: "NectoMono", monospace;
 	--font-sans: "Absans", sans-serif;
-	--text-shadow-m: 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg);
 }
 
 html[data-theme="dark"] {
 	--color-bg: #001233;
-	--color-primary: #d4dae9;
-	--color-secondary: #b4bbcb;
+	--color-primary: #d4e0e9;
+	--color-secondary: #b4c4cb;
 	--color-accent: #3abaff;
 	--color-accent2: #0494c8;
 
 	--font-mono: "NectoMono", monospace;
 	--font-sans: "Absans", sans-serif;
-	--text-shadow-m: 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg), 0px 0px 1em var(--color-bg);
 }
 
 /* base styles */
 @layer base {
+	a:focus-visible,
+	button:focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 4px;
+		border-radius: 2px;
+	}
+
 	::-webkit-scrollbar {
-		width: 10px;
+		width: 0px;
+		height: 0px;
 	}
 
 	::-webkit-scrollbar-track {
@@ -90,7 +96,6 @@ html[data-theme="dark"] {
 
 	p {
 		font-family: var(--font-sans);
-		text-shadow: var(--text-shadow-m);
 	}
 
 	h1 {

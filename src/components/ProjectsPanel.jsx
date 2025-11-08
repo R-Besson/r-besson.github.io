@@ -8,7 +8,7 @@ const projects = [
 		link: "https://github.com/R-Besson/n-dimensional-strip-packing",
 		image: "https://github.com/R-Besson/n-dimensional-strip-packing/blob/main/img/example.png?raw=true",
 		tags: ["Rust", "Python"],
-		status: "ONGOING"
+		status: "Ongoing"
 	},
 	{
 		title: "2D Strip-Packing",
@@ -16,7 +16,7 @@ const projects = [
 		link: "https://github.com/R-Besson/strip-packing-cpp-rewritten",
 		image: "https://github.com/R-Besson/strip-packing-cpp-rewritten/blob/main/src/example.png?raw=true",
 		tags: ["C++", "Python", "Makefile"],
-		status: "ONGOING"
+		status: "Ongoing"
 	},
 	{
 		title: "Playlist Transfer",
@@ -35,26 +35,40 @@ const projects = [
 		description: "My github.io portfolio and website.",
 		link: "https://github.com/R-Besson/r-besson.github.io",
 		tags: ["Astro", "React", "JavaScript", "HTML", "CSS", "Tailwind"],
-		status: "ONGOING"
+		status: "Ongoing"
 	},
 ];
 
 const ProjectsPanel = ({ isOpen, onClose }) => {
 	return (
 		<div
-			className={`fixed inset-0 z-30 transition-opacity duration-200 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+			onClick={onClose}
+			className={`fixed inset-0 z-30 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
 		>
 			<div
-				className={`fixed bottom-0 right-0 h-full w-full max-w-4xl bg-transparent backdrop-blur-xl shadow-2xl transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}
+				onClick={(e) => e.stopPropagation()}
+				className={`fixed bottom-0 right-0 h-full w-full max-w-4xl bg-transparent transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}
 			>
 				<div className="p-4 md:p-8 h-full overflow-y-auto">
 					<div className="flex justify-end mb-4">
 						<button
 							onClick={onClose}
-							className="text-4xl md:text-5xl text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors duration-300 cursor-pointer"
+							className="inline-flex items-center gap-4 text-4xl md:text-5xl text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors duration-300 cursor-pointer"
 							aria-label="Close projects panel"
 						>
-							&larr; back
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="size-10"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"></path>
+							</svg>back
 						</button>
 					</div>
 
